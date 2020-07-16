@@ -62,6 +62,24 @@ public class ColaboradorService {
 		return dto;
 	}
 	
+	public boolean verifQuantMenorIdade(Long setor_id) {
+		
+		int qtdeMenor = 0;
+		boolean verificador = false;
+		
+		
+		List<ColaboradorDto> colaboradoresDto = getColabBySetor(setor_id);
+		Colaborador model = new Colaborador();		 
+		
+		for(ColaboradorDto c : colaboradoresDto) {
+			
+			model.set
+			
+		}
+		
+		return verificador;
+	}
+	
 	
 	public List<ColaboradorDto> findAll(){
 		
@@ -93,8 +111,17 @@ public class ColaboradorService {
 		}		
 	}
 	
-	public void deleteColaborador(Colaborador c) {
-		try {			
+	public void deleteColaborador(ColaboradorDto dto) {
+		try {
+			Colaborador c = new Colaborador();
+			c.setNome(dto.getNome());
+			c.setEmail(dto.getEmail());
+			c.getSetor().setId(dto.getCod_setor());
+			c.setTelefone(dto.getContato());
+			c.setData_nascimento(dto.getDatanascimento());
+			c.setCpf(dto.getCpf());
+			
+			
 			colabrepo.delete(c);
 			
 		} catch (Exception e) {
