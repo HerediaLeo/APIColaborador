@@ -67,7 +67,7 @@ public class ColaboradorResource {
 	}
 	
 	@GetMapping("/removerColaborador/{id}")
-	@ApiOperation(value = "Remove um colaborador passando o objeto no body.")
+	@ApiOperation(value = "Remove um colaborador passando o id do colaborador.")
 	public void removeColaborador(@PathVariable Long id) {
 		
 		cserv.deleteColaborador(id);
