@@ -18,7 +18,7 @@ import br.com.project.BackendJuniorLeonardoHeredia.model.Colaborador;
 public interface ColaboradorRepo extends JpaRepository<Colaborador, Long> {
 
 	@Query(value = "select new br.com.project.BackendJuniorLeonardoHeredia.dto.ColaboradorDto"
-			+ "(c.nome, c.email, c.telefone, c.cpf,c.data_nascimento,c.setor.id, c.setor.descricao)"
+			+ "(c.id,c.nome, c.email, c.telefone, c.cpf,c.data_nascimento,c.setor.id, c.setor.descricao)"
 			+ "from Colaborador c where c.setor.id = :setor_id") 		
 	List<ColaboradorDto> getColaboradorPorSetor(Long setor_id);
 	

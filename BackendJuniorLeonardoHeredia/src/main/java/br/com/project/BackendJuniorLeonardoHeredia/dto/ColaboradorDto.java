@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ColaboradorDto {
 
+	private Long id;
 	
 	private String nome;
 	

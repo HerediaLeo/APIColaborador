@@ -1,6 +1,8 @@
 package br.com.project.BackendJuniorLeonardoHeredia.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +64,10 @@ public class ColaboradorService {
 		return dto;
 	}
 	
+	/*
 	public boolean verifQuantMenorIdade(Long setor_id) {
+		
+		LocalDate dataHoje = LocalDate.now();
 		
 		int qtdeMenor = 0;
 		boolean verificador = false;
@@ -73,12 +78,24 @@ public class ColaboradorService {
 		
 		for(ColaboradorDto c : colaboradoresDto) {
 			
-			model.set
+			model.setNome(c.getNome());
+			model.setEmail(c.getEmail());
+			model.getSetor().setId(c.getCod_setor());
+			model.setTelefone(c.getContato());
+			model.setData_nascimento(c.getDatanascimento());
+			model.setCpf(c.getCpf());
 			
+			
+			if() {
+								
+				
+			}			
+						
 		}
-		
+			
 		return verificador;
 	}
+	*/
 	
 	
 	public List<ColaboradorDto> findAll(){
@@ -93,7 +110,7 @@ public class ColaboradorService {
 			for(Colaborador c : model) {
 				
 				ColaboradorDto cdto = new ColaboradorDto();
-				
+				cdto.setId(c.getId());
 				cdto.setNome(c.getNome());
 				cdto.setDatanascimento(c.getData_nascimento());
 				cdto.setCpf(c.getCpf());
@@ -111,29 +128,16 @@ public class ColaboradorService {
 		}		
 	}
 	
-	public void deleteColaborador(ColaboradorDto dto) {
+	public void deleteColaborador(Long id) {
 		try {
-			Colaborador c = new Colaborador();
-			c.setNome(dto.getNome());
-			c.setEmail(dto.getEmail());
-			c.getSetor().setId(dto.getCod_setor());
-			c.setTelefone(dto.getContato());
-			c.setData_nascimento(dto.getDatanascimento());
-			c.setCpf(dto.getCpf());
 			
-			
-			colabrepo.delete(c);
+			colabrepo.deleteById(id);
 			
 		} catch (Exception e) {
 			throw e;
 		}
 	}
 	
-	/* 
-	 * Como o deletAll remove todos os registros da entitade em que tem o seu "Repo",
-	 * não é necessário passar parâmetro.
-	 * 
-	 * */
 	
 	public void deletarColaboradores() {		
 		try {			
