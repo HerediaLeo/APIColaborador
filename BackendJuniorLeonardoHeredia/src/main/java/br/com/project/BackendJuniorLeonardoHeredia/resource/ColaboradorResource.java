@@ -23,7 +23,7 @@ import br.com.project.BackendJuniorLeonardoHeredia.dto.ColaboradorDto;
 import br.com.project.BackendJuniorLeonardoHeredia.dto.ColaboradorListaNegraDto;
 import br.com.project.BackendJuniorLeonardoHeredia.model.Colaborador;
 import br.com.project.BackendJuniorLeonardoHeredia.service.ColaboradorService;
-
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 
@@ -33,6 +33,7 @@ import io.swagger.annotations.ApiOperation;
  * 13 de jul de 2020
  */
 @RestController
+@Api(value = "/")
 @RequestMapping("/api/public/colaborador")
 public class ColaboradorResource {
 
