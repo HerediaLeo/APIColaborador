@@ -1,6 +1,8 @@
 package br.com.project.BackendJuniorLeonardoHeredia.service;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,20 +66,22 @@ public class ColaboradorService {
 		return dto;
 	}
 	
-	/*
+	
 	public boolean verifQuantMenorIdade(Long setor_id) {
 		
-		LocalDate dataHoje = LocalDate.now();
+		LocalDate dataHoje = LocalDate.now();		
+		LocalDate dtNascFormatada;
 		
 		int qtdeMenor = 0;
+		int qtdeTotalSetor = 0;
 		boolean verificador = false;
-		
-		
+				
 		List<ColaboradorDto> colaboradoresDto = getColabBySetor(setor_id);
-		Colaborador model = new Colaborador();		 
+		Colaborador model = new Colaborador();
 		
-		for(ColaboradorDto c : colaboradoresDto) {
-			
+		qtdeTotalSetor = colaboradoresDto.size();
+		
+		for(ColaboradorDto c : colaboradoresDto) {			
 			model.setNome(c.getNome());
 			model.setEmail(c.getEmail());
 			model.getSetor().setId(c.getCod_setor());
@@ -85,17 +89,21 @@ public class ColaboradorService {
 			model.setData_nascimento(c.getDatanascimento());
 			model.setCpf(c.getCpf());
 			
-			
-			if() {
-								
-				
-			}			
+			dtNascFormatada = model.getData_nascimento().toInstant().atZone( ZoneId.systemDefault() ).toLocalDate();
+			Period periodo = Period.between(dtNascFormatada, dataHoje);
 						
+			if(periodo.getYears() < 18) {
+				qtdeMenor++;
+				if(qtdeMenor > (qtdeTotalSetor / 5)){
+					verificador = true;
+				}
+			}
+			
 		}
 			
 		return verificador;
 	}
-	*/
+	
 	
 	
 	public List<ColaboradorDto> findAll(){
@@ -178,9 +186,8 @@ public class ColaboradorService {
 		Colaborador colabmodel = new Colaborador();
 		Setor setormodel = new Setor();
 		try {
+			
 			if(verificaListaNegra(dto) == false){
-				
-				
 				
 				setormodel.setId(dto.getCod_setor());
 				setormodel.setDescricao(dto.getDesc_setor());
@@ -192,13 +199,15 @@ public class ColaboradorService {
 				colabmodel.setEmail(dto.getEmail());		
 				colabmodel.setSetor(setormodel);
 				
-				colabrepo.save(colabmodel);					
+				
+					colabrepo.save(colabmodel);					 
+					
 			}	
 			return colabmodel;
 		} 
 		catch (Exception e) {
 			throw e;
-		}		
+		}
 			
 	}
 	
